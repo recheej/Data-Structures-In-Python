@@ -14,7 +14,7 @@ class Queue(object):
 
         if self.linked_list.head is None:
 
-            self.linked_list.insert(5)
+            self.linked_list.insert(item)
 
             return
 
