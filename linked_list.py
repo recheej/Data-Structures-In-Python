@@ -14,6 +14,7 @@ class LinkedList(object):
     def __init__(self):
 
         self.head = None
+        self.tail = None
 
     def insert(self, item):
 
@@ -21,6 +22,7 @@ class LinkedList(object):
 
         if temp is None:
             self.head = Node(item)
+            self.tail = self.head
             return
 
         while temp.next is not None:
@@ -28,11 +30,13 @@ class LinkedList(object):
             temp = temp.next
 
         temp.next = Node(item)
+        self.tail = temp.next
 
     def insert_front(self, item):
 
         if self.head is None:
             self.head = Node(item)
+            self.tail = self.head
             return
 
         new_head = Node(item)
@@ -61,6 +65,7 @@ class LinkedList(object):
 
             if temp.next is None:
                 self.head = None
+                self.tail = None
             else:
                 self.head = temp.next
 
@@ -127,7 +132,14 @@ class LinkedList(object):
     def delete_node(self, node):
 
         if node == self.head and node.next is None:
+            self.tail = None
             self.head = None
+            return
+
+        if node.next is None:
+
+            node = None
+            self.tail = None
             return
 
         next_node = node.next

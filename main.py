@@ -4,17 +4,23 @@ from linked_list import LinkedList
 from hash_table import HashTable
 import strings
 from stack import Stack
+from queue import Queue
 
 
 def main():
 
-    stack = Stack()
 
-    stack.push(2)
+    queue = Queue()
 
-    stack.push(3)
+    queue.enqueue(5)
 
-    print stack.size()
+    queue.enqueue(6)
+
+    queue.enqueue(7)
+
+    queue.dequeue()
+
+    print 2
 
 
 
