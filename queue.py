@@ -2,6 +2,7 @@ __author__ = 'recheejozil'
 
 from linked_list import LinkedList
 from linked_list import Node
+from stack import Stack
 
 
 class Queue(object):
@@ -42,3 +43,40 @@ class Queue(object):
     def size(self):
 
         return self.linked_list.size()
+
+
+class MyQueue(object):
+
+    def __init__(self):
+
+        self.stack_one = Stack()
+        self.stack_two = Stack()
+
+    def enqueue(self, item):
+
+        if self.stack_one.is_empty():
+
+            self.stack_one.push(item)
+            return
+
+        while not self.stack_one.is_empty():
+
+            temp = self.stack_one.top()
+
+            self.stack_one.pop()
+
+            self.stack_two.push(temp)
+
+        self.stack_one.push(item)
+
+        while not self.stack_two.is_empty():
+
+            temp = self.stack_two.top()
+
+            self.stack_two.pop()
+
+            self.stack_one.push(temp)
+
+    def dequeue(self):
+
+        self.stack_one.pop()
