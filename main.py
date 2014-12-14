@@ -16,4 +16,6 @@ def main():
 
     print stack.size()
 
+
+
 main()
