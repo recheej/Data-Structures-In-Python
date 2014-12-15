@@ -120,3 +120,27 @@ class BinarySearchTree(object):
             root = root.right
 
         return root.key
+
+    def delete(self, item):
+
+        node = self.find(item)
+
+        if node.left is None and node.right is None:
+            node = None
+            return
+
+        if node.left is None and node.right is not None:
+
+            node = node.right
+            return
+
+        if node.left is not None and node.right is None:
+
+            node = node.left
+            return
+
+        node_to_replace = node.right
+
+        # TODO implement way to delete node with two children
+
+
