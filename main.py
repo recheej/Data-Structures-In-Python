@@ -5,20 +5,21 @@ from hash_table import HashTable
 import strings
 from stack import Stack
 from queue import Queue, MyQueue
+from binary_tree import BinarySearchTree
 
 
 def main():
 
-    test_queue = MyQueue()
+    tree = BinarySearchTree()
 
-    test_queue.enqueue(5)
+    tree.insert_list([25, 15, 50, 10, 22, 35, 70, 4, 12, 18, 24, 31, 44, 66, 90, 60])
 
-    test_queue.enqueue(6)
+    tree.traverse_postorder(tree.root)
 
-    test_queue.enqueue(7)
+    node = tree.find(0)
 
-    test_queue.enqueue(8)
+    print tree.minimum()
 
-    print 2
+    print tree.maximum()
 
 main()
