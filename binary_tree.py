@@ -1,6 +1,5 @@
 __author__ = 'recheejozil'
 
-
 class TreeNode(object):
 
     def __init__(self, item=None):
@@ -101,9 +100,7 @@ class BinarySearchTree(object):
 
         return None
 
-    def minimum(self):
-
-        root = self.root
+    def minimum(self, root):
 
         while root.left is not None:
 
@@ -111,9 +108,7 @@ class BinarySearchTree(object):
 
         return root.key
 
-    def maximum(self):
-
-        root = self.root
+    def maximum(self, root):
 
         while root.right is not None:
 
@@ -139,8 +134,35 @@ class BinarySearchTree(object):
             node = node.left
             return
 
-        node_to_replace = node.right
-
         # TODO implement way to delete node with two children
 
+        largest_left = self.find(self.maximum(node.left))
 
+        self.delete(largest_left.key)
+
+        node.key = largest_left.key
+
+    def height(self, root):
+
+        if root is None:
+            return -1
+
+        left_height = self.height(root.left)
+
+        right_height = self.height(root.right)
+
+        if left_height > right_height:
+            return left_height + 1
+        else:
+            return right_height + 1
+
+    def is_balanced(self, root):
+
+        left_height = self.height(root.left)
+        right_height = self.height(root.right)
+        height_difference = right_height - left_height
+
+        if height_difference < 0:
+            height_difference *= -1
+
+        return height_difference <= 1
