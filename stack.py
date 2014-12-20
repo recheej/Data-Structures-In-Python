@@ -5,9 +5,12 @@ from linked_list import LinkedList
 
 class Stack(object):
 
-    def __init__(self):
+    def __init__(self, root=None):
 
         self.linked_list = LinkedList()
+
+        if root is not None:
+            self.push(root)
 
     def push(self, item):
 

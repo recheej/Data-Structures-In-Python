@@ -1,5 +1,7 @@
 __author__ = 'recheejozil'
 
+from stack import Stack
+
 class TreeNode(object):
 
     def __init__(self, item=None):
@@ -14,6 +16,8 @@ class BinarySearchTree(object):
     def __init__(self):
 
         self.root = None
+
+        self.traverse_stack = Stack()
 
     def insert_list(self, list):
 
@@ -53,9 +57,34 @@ class BinarySearchTree(object):
 
         self.traverse_inorder(root.left)
 
-        print root.key
+        self.traverse_stack.push(root.key)
 
         self.traverse_inorder(root.right)
+
+    def k_largest(self, k):
+
+        self.traverse_inorder(self.root)
+
+        num_pops = 0
+
+        top = self.traverse_stack.top()
+
+        if k == 1:
+            return top
+
+        self.traverse_stack.pop()
+
+        num_pops += 1
+
+        while num_pops != k:
+
+            top = self.traverse_stack.top()
+
+            self.traverse_stack.pop()
+
+            num_pops += 1
+
+        return top
 
     def traverse_preorder(self, root):
 
