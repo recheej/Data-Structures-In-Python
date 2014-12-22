@@ -148,9 +148,7 @@ class BinarySearchTree(object):
 
         return root.key
 
-    def delete(self, item):
-
-        node = self.find(item)
+    def delete(self, node):
 
         if node.left is None and node.right is None:
             node = None
@@ -166,13 +164,11 @@ class BinarySearchTree(object):
             node = node.left
             return
 
-        # TODO implement way to delete node with two children
+        largest_right = self.find(self.minimum(node.right))
 
-        largest_left = self.find(self.maximum(node.left))
+        node.key = largest_right.key
 
-        self.delete(largest_left.key)
-
-        node.key = largest_left.key
+        self.delete(largest_right)
 
     def height(self, root):
 
