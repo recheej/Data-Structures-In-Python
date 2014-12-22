@@ -217,3 +217,22 @@ class BinarySearchTree(object):
             temp_node = temp_node.parent
 
         print temp_node.parent.key
+
+    def predecessor(self, node):
+
+        if node == self.root:
+
+            print "no predecessor"
+            return
+
+        if node.left is not None:
+            print self.find(self.maximum(node.left)).key
+            return
+
+        temp_node = node
+
+        while temp_node != temp_node.parent.right:
+
+            temp_node = temp_node.parent
+
+        print temp_node.parent.key
