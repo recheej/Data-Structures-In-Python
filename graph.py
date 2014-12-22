@@ -7,11 +7,13 @@ from stack import Stack
 
 class Graph(object):
 
-    def __init__(self, is_weighted, num_vertices=None, head=None):
+    def __init__(self, is_directed, num_vertices=None, head=None):
 
         self.adj = []
 
-        self.weighted = is_weighted
+        self.visited = []
+
+        self.directed = is_directed
 
         if head is not None:
 
@@ -25,11 +27,13 @@ class Graph(object):
 
                 self.adj.append(LinkedList())
 
+                self.visited.append(False)
+
     def add_edge(self, source, dest):
 
         self.adj[source].insert(dest)
 
-        if not self.weighted:
+        if not self.directed:
             self.adj[dest].insert(source)
 
     def bfs(self):
@@ -62,33 +66,53 @@ class Graph(object):
 
                 node = node.next
 
+    def all_visited(self):
+
+        for vertex in self.visited:
+
+            if not vertex:
+                return False
+
+        return True
+
+    def dfs_recursive(self, vertex):
+
+        if self.all_visited():
+            return
+
+        print vertex
+        self.visited[vertex] = True
+
+        adj_vertex = self.adj[vertex].head
+
+        while adj_vertex is not None:
+
+            if not self.visited[adj_vertex.data]:
+
+                self.dfs_recursive(adj_vertex.data)
+
+            adj_vertex = adj_vertex.next
+
     def dfs(self):
 
-        stack = Stack(self.head)
+        stack = Stack()
 
-        visited = []
-
-        for vertex in range(0, len(self.adj)):
-            visited.append(False)
+        stack.push(self.head)
 
         while not stack.is_empty():
 
-            vertex = stack.top()
-
+            top = stack.top()
             stack.pop()
 
-            if not visited[vertex]:
+            if not self.visited[top]:
 
-                print vertex
+                print top
+                self.visited[top] = True
 
-                visited[vertex] = True
+                adj_node = self.adj[top].head
 
-                node = self.adj[vertex].head
+                while adj_node is not None:
 
-                while node is not None:
+                    stack.push(adj_node.data)
 
-                    if not visited[node.data]:
-
-                        stack.push(node.data)
-
-                    node = node.next
+                    adj_node = adj_node.next

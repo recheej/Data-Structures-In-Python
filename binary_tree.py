@@ -9,6 +9,7 @@ class TreeNode(object):
         self.key = item
         self.left = None
         self.right = None
+        self.parent = None
 
 
 class BinarySearchTree(object):
@@ -38,6 +39,7 @@ class BinarySearchTree(object):
 
             if root.left is None:
                 root.left = TreeNode(item)
+                root.left.parent = root
                 return
 
             self.insert(item, root.left)
@@ -46,6 +48,7 @@ class BinarySearchTree(object):
 
             if root.right is None:
                 root.right = TreeNode(item)
+                root.right.parent = root
                 return
 
             self.insert(item, root.right)
@@ -57,7 +60,7 @@ class BinarySearchTree(object):
 
         self.traverse_inorder(root.left)
 
-        self.traverse_stack.push(root.key)
+        print root.key
 
         self.traverse_inorder(root.right)
 
@@ -195,3 +198,22 @@ class BinarySearchTree(object):
             height_difference *= -1
 
         return height_difference <= 1
+
+    def sucessor(self, node):
+
+        if node.parent == self.root and node.right is None:
+            print "does not have successor"
+            return
+
+        if node.right is not None:
+
+            print self.find(self.minimum(node.right)).key
+            return
+
+        temp_node = node
+
+        while temp_node != temp_node.parent.left:
+
+            temp_node = temp_node.parent
+
+        print temp_node.parent.key

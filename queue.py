@@ -19,11 +19,11 @@ class Queue(object):
 
             return
 
-        tail = self.linked_list.tail
+        node = Node(item)
 
-        tail.next = Node(item)
+        self.linked_list.tail.next = node
 
-        self.linked_list.tail = tail.next
+        self.linked_list.tail = self.linked_list.tail.next
 
     def dequeue(self):
 
@@ -31,7 +31,7 @@ class Queue(object):
 
     def front(self):
 
-        return self.linked_list.head
+        return self.linked_list.head.data
 
     def is_empty(self):
 

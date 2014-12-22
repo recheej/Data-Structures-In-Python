@@ -13,9 +13,9 @@ def main():
 
     tree = BinarySearchTree()
 
-    tree.insert_list([1, 2, 3, 4, 5])
+    tree.insert_list([20, 8, 22, 4, 12, 10, 14])
 
-    print tree.k_largest(3)
+    sucessor = tree.sucessor(tree.find(20))
 
 
 main()
