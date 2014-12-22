@@ -236,3 +236,18 @@ class BinarySearchTree(object):
             temp_node = temp_node.parent
 
         print temp_node.parent.key
+
+    def is_bst_helper(cls, root, low, high):
+
+        if root is None:
+            return True
+
+        if root.key > low and root.key < high:
+
+            return cls.is_bst_helper(root.left, low, root.key) and cls.is_bst_helper(root.right, root.key, high)
+
+        return False
+
+    def is_BST(cls, bst):
+
+        return cls.is_bst_helper(bst.root, -1, 200000)
