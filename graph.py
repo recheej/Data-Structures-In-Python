@@ -18,6 +18,7 @@ class Graph(object):
         if head is not None:
 
             self.head = head
+
         else:
             self.head = None
 
@@ -107,9 +108,13 @@ class Graph(object):
             if not self.visited[top]:
 
                 print top
+
                 self.visited[top] = True
 
-                adj_node = self.adj[top].head
+                adj_list = self.adj[top]
+                adj_list = LinkedList.reverse(adj_list)
+
+                adj_node = adj_list.head
 
                 while adj_node is not None:
 

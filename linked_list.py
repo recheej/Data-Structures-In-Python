@@ -7,6 +7,7 @@ class Node(object):
 
         self.data = data
         self.next = None
+        self.prev = None
 
 
 class LinkedList(object):
@@ -15,6 +16,21 @@ class LinkedList(object):
 
         self.head = None
         self.tail = None
+
+    @staticmethod
+    def reverse(linked_list):
+
+        new_list = LinkedList()
+
+        temp = linked_list.tail
+
+        while temp is not None:
+
+            new_list.insert(temp.data)
+
+            temp = temp.prev
+
+        return new_list
 
     def insert(self, item):
 
@@ -30,6 +46,7 @@ class LinkedList(object):
             temp = temp.next
 
         temp.next = Node(item)
+        temp.next.prev = temp
         self.tail = temp.next
 
     def insert_front(self, item):
